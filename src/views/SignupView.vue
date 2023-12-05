@@ -6,7 +6,7 @@ import LogoComponent from '../components/LogoComponent.vue'
 	<form>
 		<div id="content">
 			<LogoComponent />
-			<div id="title">Login</div>
+			<div id="title">Signup</div>
 			<div class="field-container">
 				<label for="email">Email</label>
 				<input type="email" name="email" id="email" required/>
@@ -15,8 +15,12 @@ import LogoComponent from '../components/LogoComponent.vue'
 				<label for="password">Password</label>
 				<input type="password" name="password" id="password" required/>
 			</div>
+			<div class="field-container">
+				<label for="confirm-password">Confirm Password</label>
+				<input type="password" name="confirmPassword" id="confirm-password" required/>
+			</div>
 			<div id="buttons-container">
-				<input type="submit" id="submit" value="Login"/>
+				<input type="submit" id="submit" value="Signup"/>
 			</div>
 		</div>
 	</form>
