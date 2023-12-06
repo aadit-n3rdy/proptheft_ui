@@ -1,13 +1,23 @@
-#app * {
+@import url('./base.css');
+
+body * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   outline: none;
+  border: none;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  border-radius: 0.5em;
+  font-size: 1em;
+  transition-duration: 0.5s;
 }
 
-#app {
+body {
   margin: 0;
   padding: 0;
   height:100%;
   font-weight: normal;
+  background-color: var(--c-light1);
+  color: var(--c-dark1);
+  font-size: 1.2rem;
 }

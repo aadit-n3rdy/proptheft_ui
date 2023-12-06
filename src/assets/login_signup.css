@@ -1,0 +1,68 @@
+@import url('./base.css');
+
+#title {
+	font-size: 2em;
+	text-align: center;
+	font-weight: bold;
+	color: var(--c-dark1);
+}
+
+.logo {
+	font-size: 1em;
+	color: var(--c-dark2);
+}
+
+#content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    border: none;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 2em;
+	width: 25%;
+	margin: auto;
+	gap: 2em;
+    padding: 2em 4em;
+	border: none;
+	border-radius: 0.5em;
+    background-color: var(--c-light2);
+    color: var(--c-dark1);
+
+	box-shadow: var(--c-dark2) 0.5em 0.5em;
+}
+.field-container {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
+	align-items: left;
+    width: 100%;
+}
+.field-container label {
+    color: var(--c-dark2);
+}
+.field-container input {
+    padding: 0.5em;
+    color: var(--c-dark1);
+    width: 100%;
+}
+#buttons-container {
+	width: 100%;
+	display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+#submit {
+    background-color: var(--c-dark2);
+    color: var(--c-light1);
+    border-radius: 0.25em;
+    font-size: 1em;
+	padding: 0.5em 2em;
+}
+
+#submit:hover {
+	background-color: var(--c-dark1);
+}

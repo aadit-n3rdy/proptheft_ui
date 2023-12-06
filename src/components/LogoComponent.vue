@@ -1,20 +1,21 @@
+<script setup>
+import IconProptheft from './icons/IconProptheft.vue';
+import LogoText from './LogoText.vue';
+</script>
 
 <template>
     <div class="logo">
-        <font-awesome-icon class="logo-icon" :icon="['fas', 'fa-database']" />
-        <span class="logo-text">Proptheft</span>
+        <IconProptheft/>
+        <LogoText/>
     </div>
 </template>
 
-<style>
+<style scoped>
 .logo {
-    font-size: 1rem;
-    margin: auto;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.25em;
 }
 </style>
 
