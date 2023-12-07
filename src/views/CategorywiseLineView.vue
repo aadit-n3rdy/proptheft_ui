@@ -1,9 +1,8 @@
-
 <template>
     <PageContainer>
         <div id="content">
             <div id="text-content">
-                <div id="title" class="border-shadow">Statewise Line Graph</div>
+                <div id="title" class="border-shadow">Categorywise Line Graph</div>
                 <!-- slider for year adjustment-->
                 <div id="years-container" class="border-shadow inp-container">
                     <span class="inp-title">Years</span>
@@ -11,10 +10,10 @@
                 </div>
                 <!-- radio buttons for states -->
                 <div id="states-container" class="border-shadow inp-container">
-                    <span class="inp-title">States</span>
+                    <span class="inp-title">Categories</span>
                     <div id="cb-container">
-                        <Selector v-for="state in Object.entries(stateDict)" v-model="checkedStates[state[0]]" enabled="true">
-                            {{ state[1] }}
+                        <Selector v-for="cat in categoryList" v-model="checkedCats[cat]" enabled="true">
+                            {{ cat }}
                         </Selector>
                     </div>
                 </div>
@@ -44,23 +43,15 @@ const stateList = ref(
     ['TN', 'AP', 'DL', 'KL', 'UP', 'MH', 'MP']
 )
 
-const stateDict = {
-   'TN': 'Tamil Nadu',
-   'AP': 'Andhra Pradesh', 
-   'DL': 'New Delhi',
-   'KL': 'Kerala'
-}
-
-//const stateDict = ref(new Map())
-//stateDict.value.set('TN', 'Tamil Nadu')
-//stateDict.value.set('AP', 'Andhra Pradesh')
-//stateDict.value.set('DL', 'New Delhi')
-//stateDict.value.set('KL', 'Kerala')
-
+const categoryList = [
+    'Motor Vehicles',
+    'Cattle',
+    'Fire Arms'
+]
 
 const yearRange = ref([1990, 2010])
 
-const checkedStates = ref({})
+const checkedCats = ref({})
 
 const datasets = ref(
     [{

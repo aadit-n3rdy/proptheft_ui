@@ -52,6 +52,7 @@ function getClasses() {
 @import url('../assets/base.css');
 .selector {
     padding: 0.5em;
+    border-radius: 0.5rem;
 }
 .selector-true {
     background-color: var(--c-dark2);
@@ -65,5 +66,6 @@ function getClasses() {
 .selector-disabled {
     background-color: lightgray;
     color: darkgray;
+    white-space: pre;
 }
 </style>
