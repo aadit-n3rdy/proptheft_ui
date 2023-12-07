@@ -7,7 +7,7 @@
                 <!-- slider for year adjustment-->
                 <div id="years-container" class="border-shadow inp-container">
                     <span class="inp-title">Years</span>
-                    <Slider id="year-inp" :min="1980" :max="2030" :step="10" v-model="yearRange" />
+                    <Slider id="year-inp" :min="1980" :max="2030" :step="5" v-model="yearRange" />
                 </div>
                 <!-- radio buttons for states -->
                 <div id="states-container" class="border-shadow inp-container">
