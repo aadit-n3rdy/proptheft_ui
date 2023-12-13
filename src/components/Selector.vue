@@ -1,6 +1,10 @@
 <template>
-    <span @click="clicked()" :id="$props.id" :class="getClasses()">
-    <slot></slot></span>
+    <span 
+      @click="clicked()" 
+      :id="$props.id" 
+      :class="getClasses()">
+      <slot></slot>
+    </span>
 </template>
 
 <script setup>
@@ -15,7 +19,8 @@ const value = computed({
     },
     set(value) {
         if (props.enabled) {
-            emit('update:modelValue', value)
+            emit('update:modelValue', props.id)
+            console.log(props.id)
         }
     }
 })
@@ -27,8 +32,9 @@ function clicked() {
         } else {
             value.value = !value.value
         }
-        console.log("clicked")
     }
+    console.log("Clicked")
+    emit('update:modelValue', props.id, value.value)
 }
 
 function getClasses() {

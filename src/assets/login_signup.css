@@ -47,6 +47,7 @@
     padding: 0.5em;
     color: var(--c-dark1);
     width: 100%;
+	border-radius: 0.5em;
 }
 #buttons-container {
 	width: 100%;

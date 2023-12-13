@@ -14,9 +14,7 @@ export default {
     datasets: Array
   },
   mounted() {
-    console.log("HELLO")
     const ctx = document.getElementById(this.id)
-    console.log(ctx)
     const labels = [2021, 2022, 2023, 2024, 2025]
     const data = {
       labels,

@@ -1,4 +1,3 @@
-
 <template>
     <PageContainer>
         <div id="content">
@@ -7,13 +6,17 @@
                 <!-- slider for year adjustment-->
                 <div id="years-container" class="border-shadow inp-container">
                     <span class="inp-title">Years</span>
-                    <Slider id="year-inp" :min="1980" :max="2030" :step="5" v-model="yearRange" />
+                    <Slider id="year-inp" :min="1980" :max="2030" :step="5" v-model="yearRange" 
+                        @update="updateYears()"/>
                 </div>
                 <!-- radio buttons for states -->
                 <div id="states-container" class="border-shadow inp-container">
                     <span class="inp-title">States</span>
                     <div id="cb-container">
-                        <Selector v-for="state in Object.entries(stateDict)" v-model="checkedStates[state[0]]" enabled="true">
+                        <Selector 
+                          v-for="state in Object.entries(stateDict)" 
+                          :key="state[0]"
+                          v-model="checkedStates[state[0]]" enabled="true">
                             {{ state[1] }}
                         </Selector>
                     </div>
@@ -40,23 +43,12 @@ import LineChart from '../components/LineChart.vue';
 import PageContainer from '../components/PageContainer.vue';
 import { ref } from 'vue';
 
-const stateList = ref(
-    ['TN', 'AP', 'DL', 'KL', 'UP', 'MH', 'MP']
-)
-
 const stateDict = {
    'TN': 'Tamil Nadu',
    'AP': 'Andhra Pradesh', 
    'DL': 'New Delhi',
    'KL': 'Kerala'
 }
-
-//const stateDict = ref(new Map())
-//stateDict.value.set('TN', 'Tamil Nadu')
-//stateDict.value.set('AP', 'Andhra Pradesh')
-//stateDict.value.set('DL', 'New Delhi')
-//stateDict.value.set('KL', 'Kerala')
-
 
 const yearRange = ref([1990, 2010])
 

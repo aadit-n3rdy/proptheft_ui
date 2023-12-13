@@ -4,7 +4,7 @@ defineProps(['icon', 'link', 'hoverText'])
 
 <template>
     <div class="sb-icon-container">
-        <font-awesome-icon :icon="['fas', $props.icon]" fixed-width />
+        <font-awesome-icon :icon="['fas', $props.icon]" fixed-width/>
         <div class="sb-text">{{ hoverText }}</div>
     </div>
 </template>

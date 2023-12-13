@@ -12,7 +12,10 @@
                 <div id="states-container" class="border-shadow inp-container">
                     <span class="inp-title">Categories</span>
                     <div id="cb-container">
-                        <Selector v-for="cat in categoryList" v-model="checkedCats[cat]" enabled="true">
+                        <Selector :key="cat" v-for="cat in categoryList" v-model="checkedCats[cat]" 
+                            :id="'selector-' + cat"
+                            enabled="true" 
+                            @update="console.log(checkedCats)">
                             {{ cat }}
                         </Selector>
                     </div>
