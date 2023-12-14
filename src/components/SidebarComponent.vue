@@ -8,11 +8,10 @@ const hidden = ref(true)
 
 <template>
     <div id="sidebar" @mouseenter="hidden=false" @mouseleave="hidden=true" :style="(hidden)?'width: 2.5em;':'width: 12em;'">
-        <SidebarIcon icon="chart-simple" hover-text="View data"/>
+        <SidebarIcon icon="chart-simple" hover-text="View data" link="/view"/>
         <SidebarIcon icon="pen-to-square" hover-text="Upload data"/>
-        <SidebarIcon icon="user-lock" hover-text="View access perms"/>
-        <SidebarIcon icon="user-pen" hover-text="Edit access perms"/>
-        <SidebarIcon icon="user" hover-text="Profile"/>
+        <SidebarIcon icon="user-lock" hover-text="View Users" link="/userlist"/>
+        <SidebarIcon icon="user-pen" hover-text="Edit access perms" link="/useredit"/>
     </div>
 </template>
 
@@ -21,7 +20,7 @@ const hidden = ref(true)
 @import url(../assets/base.css);
 
 #sidebar {
-    transition-duration: 0.5s;
+    transition-duration: .5s;
 
     overflow-x: hidden;
 
@@ -35,8 +34,13 @@ const hidden = ref(true)
 
     font-size: 1.5rem;
     color: var(--c-light2);
+    max-height: 100vh;
 
     gap: 0.5em;
+}
+
+#sidebar * {
+    transition-duration: .5s;
 }
 
 </style>

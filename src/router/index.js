@@ -4,6 +4,9 @@ import SignupView from '../views/SignupView.vue'
 import StatewiseLineView from '../views/StatewiseLineView.vue'
 import CategorywiseLineView from '../views/CategorywiseLineView.vue'
 import StatewiseMapView from '../views/StatewiseMapView.vue'
+import UserListView from '../views/UserListView.vue'
+import UserEditView from '../views/UserEditView.vue'
+import DataView from '../views/DataView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,6 +15,25 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView
+    },
+    {
+      path: '/view',
+      name: 'view',
+      component: DataView
+    },
+    {
+      path: '/',
+      redirect: '/login'
+    },
+    {
+      path: '/userlist',
+      name: 'userlist',
+      component: UserListView
+    },
+    {
+      path: '/useredit',
+      name: 'useredit',
+      component: UserEditView
     },
     {
       path: '/signup',

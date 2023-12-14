@@ -2,7 +2,7 @@
 import {ref} from 'vue'
 import IconPropheft from './icons/IconProptheft.vue'
 import LogoText from './LogoText.vue';
-const username = ref('Mr. Lorem Ipsum')
+const username = ref('')
 </script>
 
 <template>

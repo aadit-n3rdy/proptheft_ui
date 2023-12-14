@@ -1,41 +1,54 @@
 <template>
-  <div :id="this.id + '-wrapper'">
-  <canvas :id="this.id"></canvas>
+  <div :id="$props.id + '-wrapper'">
+  <canvas :id="$props.id"></canvas>
   </div>
 </template>
 
-<script>
+<script setup>
 import {Chart} from 'chart.js/auto'
-export default {
-  name: 'LineChart',
-  props: {
-    id: String,
-    labels: Array,
-    datasets: Array
-  },
-  mounted() {
-    const ctx = document.getElementById(this.id)
-    const labels = [2021, 2022, 2023, 2024, 2025]
-    const data = {
-      labels,
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 2,
-        borderColor: "#5cddff",
-        lineTension: 0,
-      }]
-    }
-    const config = {
-      type: 'line',
-      data,
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
+import { Colors } from 'chart.js/auto';
+import { watch, onMounted } from 'vue';
+Chart.register(Colors)
+const props = defineProps([
+  'id',
+  'labels',
+  'datasets'
+])
+let chart = null;
+function updateChart() {
+  const ctx = document.getElementById(props.id)
+  const data = {
+    labels: props.labels,
+    datasets: props.datasets
+  }
+  const config = {
+    type: 'line',
+    data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        color: {
+          forceOverride: true
+        }
       }
     }
-    new Chart(ctx, config)
+  }
+  if (chart == null) {
+     chart = new Chart(ctx, config)
+  } else {
+    chart.destroy()
+    setTimeout(() => {
+      chart = new Chart(ctx, config)
+      console.log("refresh")
+    }, 1000)
   }
 }
+watch(()=>props.datasets, ()=> {
+  console.log('watch')
+  updateChart()
+})
+onMounted(() => {
+  updateChart()
+})
 </script>
-

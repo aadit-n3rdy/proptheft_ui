@@ -8,7 +8,6 @@ body * {
   border: none;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 1em;
-  transition-duration: 0.5s;
 }
 
 body {
@@ -19,4 +18,10 @@ body {
   background-color: var(--c-light1);
   color: var(--c-dark1);
   font-size: 1.2rem;
+}
+
+.border-shadow {
+    border: 0.1rem solid var(--c-mid);
+    box-shadow: var(--c-mid) 0.1rem 0.1rem;
+    border-radius: 0.5rem;
 }

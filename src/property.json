@@ -1,0 +1,34 @@
+[
+	{
+		"id" : 1,
+		"name" : "Motor Vehicles"
+	},
+	{
+		"id" : 2,
+		"name" : "Electronic Gadgets"
+	},
+	{
+		"id" : 3,
+		"name" : "Cash\/Jewellery"
+	},
+	{
+		"id" : 4,
+		"name" : "Household Articles\/Furniture"
+	},
+	{
+		"id" : 5,
+		"name" : "Cultural Property including Antiques"
+	},
+	{
+		"id" : 6,
+		"name" : "Cattle\/other Animals"
+	},
+	{
+		"id" : 7,
+		"name" : "Cycles"
+	},
+	{
+		"id" : 8,
+		"name" : "Other Kinds of Property Stolen"
+	}
+]

@@ -1,55 +1,23 @@
 <template>
-    <span 
+    <span
       @click="clicked()" 
       :id="$props.id" 
-      :class="getClasses()">
+      :class="{'selector': true, 'selector-disabled': !$props.enabled, 'selector-true': value, 'selector-false': !value}">
       <slot></slot>
     </span>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { ref } from 'vue';
 
-const props = defineProps(['modelValue', 'id', 'enabled'])
-const emit = defineEmits(['update:modelValue'])
+defineProps(['id', 'enabled'])
+const emit = defineEmits(['change'])
 
-const value = computed({
-    get() {
-        return props.modelValue
-    },
-    set(value) {
-        if (props.enabled) {
-            emit('update:modelValue', props.id)
-            console.log(props.id)
-        }
-    }
-})
+const value = ref(false)
 
 function clicked() {
-    if (props.enabled) {
-        if (value.value === undefined) {
-            value.value = true
-        } else {
-            value.value = !value.value
-        }
-    }
-    console.log("Clicked")
-    emit('update:modelValue', props.id, value.value)
-}
-
-function getClasses() {
-    let l = ['selector']
-    if (props.enabled) {
-        l.push('selector-enabled')
-        if (props.modelValue) {
-            l.push('selector-true')
-        } else {
-            l.push('selector-false')
-        }
-    } else {
-        l.push('selector-disabled')
-    }
-    return l
+    value.value = !value.value
+    emit("change", value.value)
 }
 
 </script>
@@ -59,6 +27,7 @@ function getClasses() {
 .selector {
     padding: 0.5em;
     border-radius: 0.5rem;
+    transition-duration: 0.5s;
 }
 .selector-true {
     background-color: var(--c-dark2);

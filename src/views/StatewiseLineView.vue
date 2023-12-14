@@ -3,56 +3,30 @@
         <div id="content">
             <div id="text-content">
                 <div id="title" class="border-shadow">Statewise Line Graph</div>
-                <!-- slider for year adjustment-->
-                <div id="years-container" class="border-shadow inp-container">
-                    <span class="inp-title">Years</span>
-                    <Slider id="year-inp" :min="1980" :max="2030" :step="5" v-model="yearRange" 
-                        @update="updateYears()"/>
-                </div>
-                <!-- radio buttons for states -->
-                <div id="states-container" class="border-shadow inp-container">
-                    <span class="inp-title">States</span>
-                    <div id="cb-container">
-                        <Selector 
-                          v-for="state in Object.entries(stateDict)" 
-                          :key="state[0]"
-                          v-model="checkedStates[state[0]]" enabled="true">
-                            {{ state[1] }}
-                        </Selector>
-                    </div>
-                </div>
+                <SelectorContainer title="States" :values="stateList" :result="checkedStates"/>
+                <MetricSelector :update-metric="updateMetric" />
             </div>
             <LineChart id="myChart" class="border-shadow" :datasets="datasets" :labels="labels" />
         </div>
     </PageContainer>
 </template>
 
-<script>
-import Slider from '@vueform/slider'
-import Selector from '../components/Selector.vue';
-export default {
-    components: {
-        Slider,
-        Selector
-    },
-}
-</script>
-
 <script setup>
 import LineChart from '../components/LineChart.vue';
 import PageContainer from '../components/PageContainer.vue';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import stateListRaw from '../states.json'
+import MetricSelector from '../components/MetricSelector.vue';
+import SelectorContainer from '../components/SelectorContainer.vue';
+import axios from 'axios';
 
-const stateDict = {
-   'TN': 'Tamil Nadu',
-   'AP': 'Andhra Pradesh', 
-   'DL': 'New Delhi',
-   'KL': 'Kerala'
-}
-
-const yearRange = ref([1990, 2010])
+const stateList = ref(stateListRaw)
 
 const checkedStates = ref({})
+
+const metric = ref('sud_cases_stolen')
+
+const labels = ref([2014, 2015, 2016])
 
 const datasets = ref(
     [{
@@ -63,99 +37,41 @@ const datasets = ref(
         lineTension: 0,
     }]
 )
-const labels = ref([2015, 2016, 2017, 2018, 2019, 2020])
-</script>
 
+updateGraph()
+
+watch(checkedStates.value, async () => {
+    updateGraph()
+})
+
+async function updateGraph() {
+    datasets.value = []
+    for (let id in checkedStates.value) {
+        if (checkedStates.value[id]) {
+            const res = await axios.get(`http://localhost:3000/data/getsuidbased?su_id=${id}`)
+            datasets.value.push({
+                label: id,
+                data: res.data.data[0][metric.value],
+                borderWidth: 2,
+                lineTension: 0.5
+
+            })
+            labels.value = res.data.data[0].array_agg
+        }
+    }
+}
+
+function updateMetric(met) {
+    metric.value = met
+    updateGraph()
+}
+
+</script> 
 <style scoped>
-.border-shadow {
-    border: 0.1rem solid var(--c-mid);
-    box-shadow: var(--c-mid) 0.1rem 0.1rem;
-    border-radius: 0.5rem;
-}
-
-#content {
-    width: 100%;
-    height: 95%;
-    justify-items: center;
-    align-items: center;
-
-    gap: 1em;
-
-    padding: 2em;
-
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-}
-
-#text-content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    padding: 1em;
-    gap: 2em;
-    height: 100%;
-    justify-content: center;
-}
-
-#title {
-    font-weight: bold;
-    font-size: 2em;
-    align-content: center;
-    justify-content: center;
-    padding: 1em;
-    width: 100%;
-    background-color: var(--c-light2);
-}
-
-#myChart-wrapper {
-    grid-column: 2;
-    padding: 2em;
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
-}
-
-.inp-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    ;
-    padding: 1.5em;
-    gap: 1em;
-}
-
-.inp-title {
-    font-size: 1.5em;
-    margin: 1em;
-    margin-left: 0;
-    margin-top: 0;
-}
-
-.state-container {
-    display: flex;
-    gap: 0.5em;
-}
-
+@import url('../assets/linePages.css');
 #cb-container {
-    width: 100%;
-    display: flex;
-    gap: 0.5em;
-    flex-wrap:wrap;
-}
-
-#year-inp {
-    --slider-connect-bg: var(--c-mid);
-    --slider-tooltip-bg: var(--c-mid);
-    --slider-tooltip-font-size: 0.8em;
-    --slider-tooltip-line-height: 1.5em;
-    transition-duration: 0;
-}
-
-#year-inp * {
-    transition-duration: 0;
-    ;
+    max-height: 5em;
+    overflow:scroll;
 }
 </style>
-
 <style src="@vueform/slider/themes/default.css"></style>

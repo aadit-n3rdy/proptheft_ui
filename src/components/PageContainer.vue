@@ -19,7 +19,6 @@ import SidebarComponent from './SidebarComponent.vue';
     grid-template-rows: min-content auto;
     grid-template-columns: max-content auto;
     width: 100%;
-    max-height: 100%;
     height: 100%;
 }
 #sidebar {

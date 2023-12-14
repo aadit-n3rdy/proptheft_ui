@@ -20,7 +20,7 @@ const props = defineProps([
     'fields',
     'modelValue'
 ])
-const emits = defineEmits(
+defineEmits(
     'update:modelValue'
 )
 const value = computed({
