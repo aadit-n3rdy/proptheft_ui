@@ -3,7 +3,7 @@
         <div id="content">
             <div id="text-content">
                 <div id="title" class="border-shadow">Statewise Line Graph</div>
-                <SelectorContainer title="States" :values="stateList" :result="checkedStates"/>
+                <SelectorContainer title="States" :values="stateList" :check-func="checkFunc" :result="checkedStates"/>
                 <MetricSelector :update-metric="updateMetric" />
             </div>
             <LineChart id="myChart" class="border-shadow" :datasets="datasets" :labels="labels" />
@@ -19,6 +19,19 @@ import stateListRaw from '../states.json'
 import MetricSelector from '../components/MetricSelector.vue';
 import SelectorContainer from '../components/SelectorContainer.vue';
 import axios from 'axios';
+
+const checkFunc = ref(async (state) => {
+    console.log('wayne@gmail.com')
+    console.log(state)
+    let res
+    try {
+        res = await axios.get(`http://localhost:3000/uauth/stateperms?mail=wayne@gmail.com&su_id=${state}`)
+    } catch (e) {
+        console.log("false? " + state)
+        return "false"
+    }
+    return "true"
+})
 
 const stateList = ref(stateListRaw)
 

@@ -16,6 +16,10 @@ async function subm(e) {
 	await axios.post('http://localhost:3000/uauth/login', params)
 	return false
 }
+
+function login() {
+	router.push('/view')
+}
 </script>
 
 <template>
@@ -32,7 +36,7 @@ async function subm(e) {
 				<input type="password" name="password" id="password" required v-model="passwordV"/>
 			</div>
 			<div id="buttons-container">
-				<input type="submit" id="submit" value="Login"/>
+				<input type="submit" id="submit" @click="() => $router.push('/view')" value="Login"/>
 			</div>
 		</div>
 	</form>

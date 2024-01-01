@@ -1,52 +1,32 @@
 <template>
     <PageContainer>
-        <form @submit="submit">
         <div id="container">
             <div id="title" class="border-shadow">
-                Edit User Permissions
+                Upload Data
             </div>
             <div id="inp-container" class="border-shadow">
                 <div class="inp">
-                    <label for="email">User Email:</label>
-                    <input type="email" id="email" required v-model="email"/>
-                </div>
-                <div class="inp">
-                    <label for="apid">Access Policy ID:</label>
-                    <input type="number" id="apid" required v-model="apid"/>
-                </div>
-                <div id="subm-container">
-                    <input type="submit" value="Submit" id="submit" />
+                    <label for="email">File Upload:</label>
+                    <input type="file" @change="upload" id="email" required />
                 </div>
             </div>
         </div>
-        </form>
     </PageContainer>
 </template>
 
 <script setup>
 import PageContainer from '../components/PageContainer.vue';
 import axios from 'axios';
-import { ref } from 'vue';
 
-const email = ref('')
-const apid = ref('')
-
-async function submit(e) {
-    console.log('email:'+ email.value)
-    console.log('ap:' + apid.value)
-    const body = {
-        u_email: email.value,
-        sp_id: apid.value
-    }
-    const res = await axios.post(`http://localhost/uauth/assignperms?mail=${email.value}&sp_id=${apid.value}`, body)
-    console.log(res)
-    return false
+function upload(e) {
+    console.log(e)
+    axios.get('http://localhost:3000/data/upload')
+    console.log("UPLOEDD")
 }
 </script>
 
 <style scoped>
-@import url('../assets/main.css');
-
+@import url('../assets/base.css');
 #container {
     display: flex;
     flex-direction: column;

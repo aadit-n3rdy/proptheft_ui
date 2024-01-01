@@ -7,6 +7,7 @@ import StatewiseMapView from '../views/StatewiseMapView.vue'
 import UserListView from '../views/UserListView.vue'
 import UserEditView from '../views/UserEditView.vue'
 import DataView from '../views/DataView.vue'
+import UploadView from '../views/UploadView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,6 +50,11 @@ const router = createRouter({
       path: '/categorywise-line',
       name: 'categorywise-line',
       component: CategorywiseLineView
+    },
+    {
+      path: '/upload',
+      name: 'upload',
+      component: UploadView
     },
     {
       path: '/statewise-map',

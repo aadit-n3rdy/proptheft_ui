@@ -10,7 +10,7 @@
 <script setup>
 import { ref } from 'vue';
 
-defineProps(['id', 'enabled'])
+const props = defineProps(['id', 'enabled'])
 const emit = defineEmits(['change'])
 
 const value = ref(false)

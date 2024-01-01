@@ -16,7 +16,8 @@ import Selector from './Selector.vue';
 defineProps([
     'values',
     'title',
-    'result'
+    'result',
+    'checkFunc'
 ])
 </script>
 
